@@ -24,9 +24,16 @@ def analytical_solution(P):
 
 if __name__ == "__main__":
     import os
+    # Ensure we look for the matrix in the same folder as this script, 
+    # regardless of where the script is run from.
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    csv_path = os.path.join(script_dir, "quant/chutesladders/transition_matrix.csv")
-    P = np.loadtxt(csv_path, delimiter=",")
+    csv_path = os.path.join(script_dir, "transition_matrix.csv")
+    
+    try:
+        P = np.loadtxt(csv_path, delimiter=",")
+    except FileNotFoundError:
+        # Fallback if csv is in quant/ relative to running dir (legacy)
+        P = np.loadtxt("quant/transition_matrix.csv", delimiter=",")
 
     row_sums = P.sum(axis=1)
     row_sums[row_sums == 0] = 1.0
