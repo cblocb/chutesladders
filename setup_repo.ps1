@@ -30,6 +30,8 @@ if (-not (Get-Command git -ErrorAction SilentlyContinue) -and $GitPath -eq "git"
 # Initialize repository first so config commands work
 Write-Host "Initializing repository..." -ForegroundColor Cyan
 Invoke-Expression "$GitPath init"
+# Rename branch to main to match GitHub
+Invoke-Expression "$GitPath branch -M main"
 
 # Check and configure git identity if missing
 $Email = Invoke-Expression "$GitPath config user.email"

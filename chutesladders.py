@@ -25,7 +25,7 @@ def analytical_solution(P):
 if __name__ == "__main__":
     import os
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    csv_path = os.path.join(script_dir, "transition_matrix.csv")
+    csv_path = os.path.join(script_dir, "quant/chutesladders/transition_matrix.csv")
     P = np.loadtxt(csv_path, delimiter=",")
 
     row_sums = P.sum(axis=1)
